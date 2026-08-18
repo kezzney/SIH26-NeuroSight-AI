@@ -32,42 +32,52 @@ from app.core.model_arch import CUSTOM_OBJECTS, IMG_SIZE, CLASS_NAMES
 
 
 def _get_model_path() -> str:
-    # 1. Use MODEL_PATH only if explicitly set AND the file exists
+    # 1. Use local MODEL_PATH if explicitly configured and exists
     env_path = os.environ.get("MODEL_PATH")
     if env_path and os.path.exists(env_path):
         return env_path
 
-    # 2. Check local model
-    local_candidates = [
+    # 2. Check local model locations
+    candidates = [
         "models/E5_fixed_final.keras",
         "backend/models/E5_fixed_final.keras",
+        os.path.join(
+            os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
+            "models",
+            "E5_fixed_final.keras",
+        ),
     ]
 
-    for path in local_candidates:
-        if os.path.exists(path):
-            return path
+    for p in candidates:
+        if os.path.exists(p):
+            return p
 
     # 3. Download from Hugging Face
     model_url = os.environ.get(
         "MODEL_URL",
-        "https://huggingface.co/Kezzney/neurosight-model/resolve/main/E5_fixed_final.keras"
+        "https://huggingface.co/Kezzney/neurosight-model/resolve/main/E5_fixed_final.keras",
     )
 
     download_path = "/tmp/E5_fixed_final.keras"
 
-    if not os.path.exists(download_path):
-        print(f"Downloading model from: {model_url}")
-
+    try:
         import urllib.request
 
-        urllib.request.urlretrieve(
-            model_url,
-            download_path
+        print(f"Model not found locally. Downloading from: {model_url}")
+
+        urllib.request.urlretrieve(model_url, download_path)
+
+        if not os.path.exists(download_path):
+            raise FileNotFoundError("Downloaded model file does not exist.")
+
+        print(f"Model downloaded successfully to: {download_path}")
+
+        return download_path
+
+    except Exception as e:
+        raise FileNotFoundError(
+            f"Could not find model locally and Hugging Face download failed: {e}"
         )
-
-        print(f"Model downloaded to: {download_path}")
-
-    return download_path
 
 
 MODEL_PATH = _get_model_path()
