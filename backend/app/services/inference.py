@@ -42,19 +42,19 @@ def _get_model_path() -> str:
     # the fixed one isn't present.
     candidates = [
         "models/E5_fixed_final.keras",
-        "models/E5_TwoStage_best.keras",
+        "models/E5_fixed_final.keras",
         "models/E5_best_final.keras",
         "backend/models/E5_fixed_final.keras",
-        "backend/models/E5_TwoStage_best.keras",
+        "backend/models/E5_fixed_final.keras",
         "backend/models/E5_best_final.keras",
         os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "models", "E5_fixed_final.keras"),
-        os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "models", "E5_TwoStage_best.keras"),
+        os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "models", "E5_fixed_final.keras"),
         os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "models", "E5_best_final.keras"),
     ]
     for p in candidates:
         if os.path.exists(p):
             return p
-    return env_path or "models/E5_TwoStage_best.keras"
+    return env_path or "models/E5_fixed_final.keras"
 
 
 MODEL_PATH = _get_model_path()
@@ -71,7 +71,7 @@ def get_model():
         MODEL_PATH = path
         if not os.path.exists(path):
             raise FileNotFoundError(
-                f"Model not found at {path}. Export E5_TwoStage_best.keras or E5_best_final.keras "
+                f"Model not found at {path}. Export E5_fixed_final.keras or E5_best_final.keras "
                 "from Kaggle and place it in backend/models/, or set MODEL_PATH."
             )
         _model = tf.keras.models.load_model(path, custom_objects=CUSTOM_OBJECTS)
