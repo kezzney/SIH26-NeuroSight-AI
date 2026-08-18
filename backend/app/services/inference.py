@@ -32,44 +32,42 @@ from app.core.model_arch import CUSTOM_OBJECTS, IMG_SIZE, CLASS_NAMES
 
 
 def _get_model_path() -> str:
+    # 1. Use MODEL_PATH only if explicitly set AND the file exists
     env_path = os.environ.get("MODEL_PATH")
-
-    # 1. Use explicitly configured local model if it exists
     if env_path and os.path.exists(env_path):
         return env_path
 
-    # 2. Check standard local locations
-    candidates = [
+    # 2. Check local model
+    local_candidates = [
         "models/E5_fixed_final.keras",
         "backend/models/E5_fixed_final.keras",
-        os.path.join(
-            os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
-            "models",
-            "E5_fixed_final.keras",
-        ),
     ]
 
-    for p in candidates:
-        if os.path.exists(p):
-            return p
+    for path in local_candidates:
+        if os.path.exists(path):
+            return path
 
-    # 3. If the model isn't local, download it from Hugging Face
+    # 3. Download from Hugging Face
     model_url = os.environ.get(
         "MODEL_URL",
-        "https://huggingface.co/Kezzney/neurosight-model/resolve/main/E5_fixed_final.keras",
+        "https://huggingface.co/Kezzney/neurosight-model/resolve/main/E5_fixed_final.keras"
     )
 
-    download_path = os.path.join("/tmp", "E5_fixed_final.keras")
+    download_path = "/tmp/E5_fixed_final.keras"
 
-    try:
-        print(f"Model not found locally. Downloading from: {model_url}")
-        urllib.request.urlretrieve(model_url, download_path)
-        print(f"Model downloaded to: {download_path}")
-        return download_path
-    except Exception as e:
-        raise FileNotFoundError(
-            f"Model not found locally and Hugging Face download failed: {e}"
+    if not os.path.exists(download_path):
+        print(f"Downloading model from: {model_url}")
+
+        import urllib.request
+
+        urllib.request.urlretrieve(
+            model_url,
+            download_path
         )
+
+        print(f"Model downloaded to: {download_path}")
+
+    return download_path
 
 
 MODEL_PATH = _get_model_path()
