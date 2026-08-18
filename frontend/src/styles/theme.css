@@ -1,0 +1,106 @@
+/* ==========================================================================
+   NEUROSIGHT AI - Clinical Design System & Tokens
+   Clinical Workstation Theme (PACS / High-Density Enterprise Standards)
+   ========================================================================== */
+
+:root {
+  /* Surface & Background Hierarchy */
+  --bg-app: #f8fafc;
+  --bg-sidebar: #0f172a;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #ffffff;
+  --bg-surface-secondary: #f1f5f9;
+  --bg-surface-tertiary: #e2e8f0;
+  
+  /* Workstation Dark Palette (for PACS Image Viewer) */
+  --bg-viewer: #090d16;
+  --bg-viewer-surface: #131b2e;
+  --border-viewer: #1e293b;
+  --text-viewer-bright: #f8fafc;
+  --text-viewer-muted: #94a3b8;
+
+  /* Typography Colors */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-subtle: #94a3b8;
+  --text-inverse: #ffffff;
+
+  /* Border & Dividers */
+  --border-primary: #e2e8f0;
+  --border-secondary: #cbd5e1;
+  --border-subtle: #f1f5f9;
+  --border-focus: #2563eb;
+
+  /* Clinical Triage Priority Tokens */
+  --priority-high-text: #b91c1c;
+  --priority-high-bg: #fef2f2;
+  --priority-high-border: #fecaca;
+  --priority-high-accent: #dc2626;
+
+  --priority-mod-text: #b45309;
+  --priority-mod-bg: #fffbeb;
+  --priority-mod-border: #fde68a;
+  --priority-mod-accent: #d97706;
+
+  --priority-low-text: #047857;
+  --priority-low-bg: #ecfdf5;
+  --priority-low-border: #a7f3d0;
+  --priority-low-accent: #059669;
+
+  /* Workflow Status Tokens */
+  --status-pending-text: #475569;
+  --status-pending-bg: #f1f5f9;
+  --status-pending-border: #cbd5e1;
+
+  --status-reviewed-text: #1d4ed8;
+  --status-reviewed-bg: #eff6ff;
+  --status-reviewed-border: #bfdbfe;
+
+  --status-approved-text: #0f766e;
+  --status-approved-bg: #f0fdfa;
+  --status-approved-border: #99f6e4;
+
+  /* Clinical Accent (Restrained Deep Blue) */
+  --accent-primary: #1e40af;
+  --accent-primary-hover: #1d4ed8;
+  --accent-light: #eff6ff;
+  --accent-border: #bfdbfe;
+
+  /* Typography Scale */
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "Roboto Mono", Menlo, Monaco, Consolas, monospace;
+
+  --font-xs: 0.75rem;    /* 12px */
+  --font-sm: 0.8125rem;  /* 13px */
+  --font-base: 0.875rem; /* 14px */
+  --font-md: 0.9375rem;  /* 15px */
+  --font-lg: 1.0625rem;  /* 17px */
+  --font-xl: 1.25rem;    /* 20px */
+  --font-2xl: 1.5rem;    /* 24px */
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --shadow-viewer: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+
+  /* Radii */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,91 @@
+/* ==========================================================================
+   NEUROSIGHT AI - Workstation Application Styles
+   ========================================================================== */
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--bg-app);
+}
+
+.main-content {
+  flex: 1;
+  padding: 24px;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Animations */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-anim {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Table Row Hover State */
+.worklist-row:hover {
+  background-color: rgba(241, 245, 249, 0.9) !important;
+}
+
+/* Scan Analysis Two-Column Layout */
+.analysis-layout {
+  display: grid;
+  grid-template-columns: minmax(420px, 1.2fr) minmax(400px, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .analysis-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Upload View Two-Column Layout */
+.upload-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 960px) {
+  .upload-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Focus and Interactive transitions */
+button, input, select, textarea {
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--border-focus) !important;
+  outline: none;
+}
